@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/jar/lwjgl.jar" sourcepath="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/natives/windows"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/jar/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/slick-util/slick-util.jar" sourcepath="C:/Users/Sean/OpenGLAnd3D/ThinMatrixTutorial/lib/slick-util"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

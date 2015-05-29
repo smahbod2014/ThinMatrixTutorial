@@ -1,0 +1,46 @@
+#version 400 core
+
+in vec2 passTexCoords;
+in vec3 surfaceNormal;
+in vec3 toLightVector;
+in vec3 toCameraVector;
+in vec3 pos;
+in vec4 shadowCoord;
+
+uniform sampler2D textureSampler;
+uniform vec3 lightColor;
+uniform vec3 lightPosition;
+uniform float shineDamper;
+uniform float reflectivity;
+uniform float constantAttenuation;
+uniform float linearAttenuation;
+uniform float quadraticAttenuation;
+
+out vec4 outColor;
+
+void main()
+{
+	vec4 textureColor = texture(textureSampler, passTexCoords);
+	
+	//vec4 ambientComponent = vec4(0.1, 0.1, 0.1, 1.0);
+	
+	vec3 toLightDir = lightPosition - pos;
+	float dist = length(toLightDir);
+	float attenuation = 1.0 / (constantAttenuation + linearAttenuation * dist + quadraticAttenuation * dist * dist);
+	//attenuation = 1.0;
+	float dotFactor = max(0.2, dot(surfaceNormal, toLightVector));
+	vec4 diffuseComponent = vec4(lightColor, 1.0) * dotFactor * attenuation;
+	
+	vec3 lightDirection = -toLightVector;
+	vec3 reflectedLightDirection = reflect(lightDirection, surfaceNormal);
+	float specularFactor = max(0.0, dot(reflectedLightDirection, toCameraVector));
+	float dampedFactor = pow(specularFactor, shineDamper);
+	vec4 specularComponent = reflectivity * vec4(dampedFactor * lightColor, 1.0);
+
+	vec4 finalColor = textureColor * diffuseComponent + specularComponent;
+	float visibility = 1.0;
+	if (texture(textureSampler, shadowCoord.xy).z < shadowCoord.z)
+		visibility = 0.5;
+	//outColor = textureColor * diffuseComponent + specularComponent;
+	outColor = vec4(finalColor.xyz * visibility, 1.0);
+}

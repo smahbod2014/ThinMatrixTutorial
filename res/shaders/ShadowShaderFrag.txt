@@ -1,0 +1,11 @@
+#version 400 core
+
+uniform float shineDamper;
+uniform float reflectivity;
+
+out float fragmentDepth;
+
+void main()
+{
+	fragmentDepth = gl_FragCoord.z;
+}
